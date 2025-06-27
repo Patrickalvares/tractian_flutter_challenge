@@ -1,18 +1,31 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:tractian_challenge/core/navigation.dart';
+import 'package:tractian_challenge/core/routes.dart';
+import 'package:tractian_challenge/features/home/home.dart';
 import 'package:tractian_challenge/features/splash/splash_view.dart';
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  MyApp({super.key});
+
+  final Map<String, WidgetBuildArgs> routes = {};
+
+  final List<IRoutes> microApps = [HomeRoute()];
+
+  void registerRouters() {
+    for (final microApp in microApps) {
+      routes.addAll(microApp.routes);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
+    registerRouters();
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Tractian Challenge'.tr(),
-      localizationsDelegates: context.localizationDelegates,
-      supportedLocales: context.supportedLocales,
-      locale: context.locale,
+      title: 'Tractian Challenge',
+      navigatorKey: Nav.navigatorKey,
+
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
           seedColor: const Color(0xFF1E8E3E),
@@ -31,6 +44,7 @@ class MyApp extends StatelessWidget {
       ),
 
       home: const SplashView(),
+      routes: routes.map((key, value) => MapEntry(key, (context) => value(context, null))),
     );
   }
 }

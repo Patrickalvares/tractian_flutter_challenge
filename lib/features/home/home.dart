@@ -1,7 +1,7 @@
 import 'package:tractian_challenge/core/routes.dart';
 import 'package:tractian_challenge/features/home/home_view.dart';
 
-class MarketRoute implements IRoutes {
+class HomeRoute implements IRoutes {
   @override
   String get featureAppName => 'home';
 
