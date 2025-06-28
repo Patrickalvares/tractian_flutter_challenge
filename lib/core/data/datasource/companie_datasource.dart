@@ -14,7 +14,7 @@ class CompanieDataSourceImpl extends ICompanieDataSource {
       final response = await http.get('/companies');
 
       if (response.statusCode == 200) {
-        return (response.data as List).cast<Map>();
+        return (response.data).cast<Map>();
       }
       throw ApplicationException(response.data['error'] ?? 'erroGenerico');
     } on ApplicationException catch (e, s) {
