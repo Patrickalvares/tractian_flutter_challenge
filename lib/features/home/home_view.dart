@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:tractian_challenge/core/app_colors.dart';
 import 'package:tractian_challenge/core/app_svg.dart';
+import 'package:tractian_challenge/features/home/components/location_button.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -21,6 +22,16 @@ class _HomeViewState extends State<HomeView> {
         toolbarHeight: 48,
       ),
       backgroundColor: AppColor.white,
+      body: Column(
+        children: [
+          const SizedBox(height: 20),
+          LocationButton(title: 'Jaguar Unit', onTap: () {}),
+          const SizedBox(height: 25),
+          LocationButton(title: 'Tobias Unit', onTap: () {}),
+          const SizedBox(height: 25),
+          LocationButton(title: 'Apex Unit', onTap: () {}),
+        ],
+      ),
     );
   }
 }
