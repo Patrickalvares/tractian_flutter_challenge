@@ -10,7 +10,8 @@ abstract interface class IRoutes {
 
 enum AppRoutes {
   splash(path: '/'),
-  home(path: '/home');
+  home(path: '/home'),
+  assetsList(path: '/assetsList');
 
   const AppRoutes({required this.path});
   final String path;
