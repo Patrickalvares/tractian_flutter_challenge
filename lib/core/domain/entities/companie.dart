@@ -4,7 +4,7 @@ class Companie {
 
   Companie({required this.id, required this.name});
 
-  factory Companie.fromMap(Map<String, dynamic> map) {
+  factory Companie.fromMap(Map map) {
     return Companie(id: map['id'], name: map['name']);
   }
 }

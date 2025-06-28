@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:tractian_challenge/features/home/components/companie_button.dart';
+import 'package:tractian_challenge/features/home/home_state.dart';
+import 'package:tractian_challenge/features/home/home_viewmodel.dart';
+import 'package:tractian_challenge/helpers/base_notifier.dart';
 import 'package:tractian_challenge/utils/app_colors.dart';
 import 'package:tractian_challenge/utils/app_svg.dart';
-import 'package:tractian_challenge/helpers/base_notifier.dart';
-import 'package:tractian_challenge/features/home/components/companie_button.dart';
-import 'package:tractian_challenge/features/home/home_viewmodel.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -14,6 +15,12 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends StatefulBaseState<HomeView, HomeViewmodel> {
+  @override
+  void initState() {
+    super.initState();
+    viewModel.initialize();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,17 +33,22 @@ class _HomeViewState extends StatefulBaseState<HomeView, HomeViewmodel> {
       backgroundColor: AppColor.white,
       body: ValueListenableBuilder(
         valueListenable: viewModel,
-        builder: (context, value, child) {
-          return Column(
-            children: [
-              const SizedBox(height: 20),
-              CompanieButton(title: 'Jaguar Unit', onTap: () {}),
-              const SizedBox(height: 25),
-              CompanieButton(title: 'Tobias Unit', onTap: () {}),
-              const SizedBox(height: 25),
-              CompanieButton(title: 'Apex Unit', onTap: () {}),
-            ],
-          );
+        builder: (context, state, child) {
+          if (state is HomeLoadedState) {
+            return Padding(
+              padding: const EdgeInsets.only(top: 20),
+              child: ListView.separated(
+                itemBuilder: (context, index) {
+                  return CompanieButton(title: state.companies[index].name, onTap: () {});
+                },
+                separatorBuilder: (context, index) {
+                  return const SizedBox(height: 25);
+                },
+                itemCount: state.companies.length,
+              ),
+            );
+          }
+          return const SizedBox.shrink();
         },
       ),
     );
