@@ -10,6 +10,7 @@ class AssetsListRoute implements IRoutes {
 
   @override
   Map<String, WidgetBuildArgs> get routes => {
-    AppRoutes.assetsList.path: (_, __) => const AssetsListView(),
+    AppRoutes.assetsList.path:
+        (_, args) => AssetsListView(companieId: (args is String) ? args : ""),
   };
 }

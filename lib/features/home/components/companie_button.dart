@@ -41,7 +41,7 @@ class CompanieButton extends StatelessWidget {
                   child: Visibility(
                     visible: !isLoading,
                     child: SvgPicture.asset(
-                      AppSvg.location,
+                      AppSvg.companie,
                       colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
                       width: 21,
                       height: 18,
