@@ -14,7 +14,7 @@ class HomeViewmodel extends BaseNotifier<HomeState> {
     emit(HomeLoadingState());
     final result = await getCompaniesUsecase.call();
     result.when(
-      (failure) => emit(HomeErrorState()),
+      (failure) => emit(HomeErrorState(errorMessage: failure.message)),
       (success) => emit(HomeLoadedState(companies: success)),
     );
   }

@@ -11,4 +11,7 @@ class HomeLoadedState extends HomeState {
   final List<Companie> companies;
 }
 
-class HomeErrorState extends HomeState {}
+class HomeErrorState extends HomeState {
+  HomeErrorState({required this.errorMessage});
+  final String errorMessage;
+}

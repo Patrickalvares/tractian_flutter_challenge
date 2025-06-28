@@ -17,8 +17,8 @@ class CompanieDataSourceImpl extends ICompanieDataSource {
         return (response.data).cast<Map>();
       }
       throw ApplicationException(response.data['error'] ?? 'erroGenerico');
-    } on ApplicationException catch (e, s) {
-      throw ApplicationException(e.message, stackTrace: s);
+    } on DioException catch (e, s) {
+      throw ApplicationException(e.message ?? 'erroGenerico', stackTrace: s);
     }
   }
 }
