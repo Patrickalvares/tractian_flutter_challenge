@@ -1,4 +1,4 @@
-import 'package:tractian_challenge/core/routes.dart';
+import 'package:tractian_challenge/helpers/routes.dart';
 import 'package:tractian_challenge/features/home/home_view.dart';
 
 class HomeRoute implements IRoutes {

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:tractian_challenge/core/app_colors.dart';
-import 'package:tractian_challenge/core/app_svg.dart';
-import 'package:tractian_challenge/features/home/components/location_button.dart';
+import 'package:tractian_challenge/utils/app_colors.dart';
+import 'package:tractian_challenge/utils/app_svg.dart';
+import 'package:tractian_challenge/helpers/base_notifier.dart';
+import 'package:tractian_challenge/features/home/components/companie_button.dart';
+import 'package:tractian_challenge/features/home/home_viewmodel.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -11,7 +13,7 @@ class HomeView extends StatefulWidget {
   State<HomeView> createState() => _HomeViewState();
 }
 
-class _HomeViewState extends State<HomeView> {
+class _HomeViewState extends StatefulBaseState<HomeView, HomeViewmodel> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,15 +24,20 @@ class _HomeViewState extends State<HomeView> {
         toolbarHeight: 48,
       ),
       backgroundColor: AppColor.white,
-      body: Column(
-        children: [
-          const SizedBox(height: 20),
-          LocationButton(title: 'Jaguar Unit', onTap: () {}),
-          const SizedBox(height: 25),
-          LocationButton(title: 'Tobias Unit', onTap: () {}),
-          const SizedBox(height: 25),
-          LocationButton(title: 'Apex Unit', onTap: () {}),
-        ],
+      body: ValueListenableBuilder(
+        valueListenable: viewModel,
+        builder: (context, value, child) {
+          return Column(
+            children: [
+              const SizedBox(height: 20),
+              CompanieButton(title: 'Jaguar Unit', onTap: () {}),
+              const SizedBox(height: 25),
+              CompanieButton(title: 'Tobias Unit', onTap: () {}),
+              const SizedBox(height: 25),
+              CompanieButton(title: 'Apex Unit', onTap: () {}),
+            ],
+          );
+        },
       ),
     );
   }

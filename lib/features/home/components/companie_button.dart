@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:tractian_challenge/core/app_colors.dart';
-import 'package:tractian_challenge/core/app_svg.dart';
+import 'package:tractian_challenge/utils/app_colors.dart';
+import 'package:tractian_challenge/utils/app_svg.dart';
 
-class LocationButton extends StatelessWidget {
-  const LocationButton({super.key, required this.title, required this.onTap});
+class CompanieButton extends StatelessWidget {
+  const CompanieButton({super.key, required this.title, required this.onTap});
   final String title;
   final Function() onTap;
 

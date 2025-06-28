@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:tractian_challenge/core/navigation.dart';
-import 'package:tractian_challenge/core/routes.dart';
+import 'package:tractian_challenge/helpers/navigation.dart';
+import 'package:tractian_challenge/helpers/routes.dart';
 import 'package:tractian_challenge/features/home/home.dart';
 import 'package:tractian_challenge/features/splash/splash_view.dart';
 

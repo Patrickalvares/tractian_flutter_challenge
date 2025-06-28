@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:tractian_challenge/core/navigation.dart';
-import 'package:tractian_challenge/core/routes.dart';
+import 'package:tractian_challenge/helpers/navigation.dart';
+import 'package:tractian_challenge/helpers/routes.dart';
 
 class SplashView extends StatefulWidget {
   const SplashView({super.key});
