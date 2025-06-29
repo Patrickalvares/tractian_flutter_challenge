@@ -45,7 +45,16 @@ class MyApp extends StatelessWidget {
       ),
 
       home: const SplashView(),
-      routes: routes.map((key, value) => MapEntry(key, (context) => value(context, null))),
+      onGenerateRoute: (settings) {
+        final routeBuilder = routes[settings.name];
+        if (routeBuilder != null) {
+          return MaterialPageRoute(
+            builder: (context) => routeBuilder(context, settings.arguments),
+            settings: settings,
+          );
+        }
+        return null;
+      },
     );
   }
 }
