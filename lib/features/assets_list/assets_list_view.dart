@@ -18,6 +18,14 @@ class AssetsListView extends StatefulWidget {
 
 class _AssetsListViewState extends StatefulBaseState<AssetsListView, AssetsListViewmodel> {
   @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      viewModel.initialize(companieId: widget.companieId);
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColor.white,

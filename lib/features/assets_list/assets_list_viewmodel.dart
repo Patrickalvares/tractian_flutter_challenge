@@ -10,6 +10,10 @@ class AssetsListViewmodel extends BaseNotifier<AssetsListState> {
   final IGetLocationsUsecase getLocationsUsecase;
   final IGetAssetsUsecase getAssetsUsecase;
 
+  Future<void> initialize({required String companieId}) async {
+    await Future.wait([getLocations(companieId: companieId), getAssets(companieId: companieId)]);
+  }
+
   Future<void> getLocations({required String companieId}) async {
     final oldState = currentState;
     emit(AssetsListLoadingState());
