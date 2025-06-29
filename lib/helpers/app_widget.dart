@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:tractian_challenge/helpers/navigation.dart';
-import 'package:tractian_challenge/helpers/routes.dart';
+import 'package:tractian_challenge/features/assets_list/assets_list.dart';
 import 'package:tractian_challenge/features/home/home.dart';
 import 'package:tractian_challenge/features/splash/splash_view.dart';
+import 'package:tractian_challenge/helpers/navigation.dart';
+import 'package:tractian_challenge/helpers/routes.dart';
 
 class MyApp extends StatelessWidget {
   MyApp({super.key});
 
   final Map<String, WidgetBuildArgs> routes = {};
 
-  final List<IRoutes> microApps = [HomeRoute()];
+  final List<IRoutes> microApps = [HomeRoute(), AssetsListRoute()];
 
   void registerRouters() {
     for (final microApp in microApps) {

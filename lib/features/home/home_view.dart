@@ -4,6 +4,8 @@ import 'package:tractian_challenge/features/home/components/companie_button.dart
 import 'package:tractian_challenge/features/home/home_state.dart';
 import 'package:tractian_challenge/features/home/home_viewmodel.dart';
 import 'package:tractian_challenge/helpers/base_notifier.dart';
+import 'package:tractian_challenge/helpers/navigation.dart';
+import 'package:tractian_challenge/helpers/routes.dart';
 import 'package:tractian_challenge/utils/app_colors.dart';
 import 'package:tractian_challenge/utils/app_svg.dart';
 
@@ -45,7 +47,11 @@ class _HomeViewState extends StatefulBaseState<HomeView, HomeViewmodel> {
                 padding: const EdgeInsets.only(top: 20),
                 child: ListView.separated(
                   itemBuilder: (context, index) {
-                    return CompanieButton(title: state.companies[index].name, onTap: () {});
+                    final companie = state.companies[index];
+                    return CompanieButton(
+                      title: companie.name,
+                      onTap: () => Nav.pushNamed(AppRoutes.assetsList.path, arguments: companie.id),
+                    );
                   },
                   separatorBuilder: (context, index) {
                     return const SizedBox(height: 25);
