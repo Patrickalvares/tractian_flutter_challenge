@@ -1,6 +1,6 @@
 class Asset {
   final String id;
-  final String locationId;
+  final String? locationId;
   final String name;
   final String? parentId;
   final String? sensorType;
