@@ -101,27 +101,31 @@ class _TreeNodeWidget extends StatelessWidget {
             _buildNodeIcon(),
             const SizedBox(width: 8),
             Expanded(
-              child: Text(
-                node.name,
-                maxLines: 2,
-                style: const TextStyle(fontSize: 14, color: AppColor.darkFont),
+              child: Row(
+                children: [
+                  Text(
+                    node.name,
+                    maxLines: 2,
+                    style: const TextStyle(fontSize: 14, color: AppColor.darkFont),
+                  ),
+                  if (node.isEnergyComponent)
+                    Padding(
+                      padding: const EdgeInsets.only(left: 4),
+                      child: SvgPicture.asset(
+                        AppSvg.lightning,
+                        width: 14,
+                        height: 14,
+                        colorFilter: const ColorFilter.mode(Colors.green, BlendMode.srcIn),
+                      ),
+                    ),
+                  if (node.isCriticalComponent)
+                    const Padding(
+                      padding: EdgeInsets.only(left: 4),
+                      child: Icon(Icons.circle, size: 11, color: Colors.red),
+                    ),
+                ],
               ),
             ),
-            if (node.isEnergyComponent)
-              Padding(
-                padding: const EdgeInsets.only(left: 4),
-                child: SvgPicture.asset(
-                  AppSvg.lightning,
-                  width: 12,
-                  height: 12,
-                  colorFilter: const ColorFilter.mode(Colors.green, BlendMode.srcIn),
-                ),
-              ),
-            if (node.isCriticalComponent)
-              const Padding(
-                padding: EdgeInsets.only(left: 4),
-                child: Icon(Icons.circle, size: 8, color: Colors.red),
-              ),
           ],
         ),
       ),
