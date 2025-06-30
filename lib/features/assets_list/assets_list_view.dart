@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:tractian_challenge/features/assets_list/assets_list_state.dart';
 import 'package:tractian_challenge/features/assets_list/assets_list_viewmodel.dart';
+import 'package:tractian_challenge/features/assets_list/components/search_filters_widget.dart';
 import 'package:tractian_challenge/features/assets_list/components/tree_widget.dart';
 import 'package:tractian_challenge/helpers/base_notifier.dart';
 import 'package:tractian_challenge/helpers/navigation.dart';
@@ -72,7 +73,17 @@ class _AssetsListViewState extends StatefulBaseState<AssetsListView, AssetsListV
           if (state is AssetsListLoadedState) {
             return Column(
               children: [
-                _buildSearchAndFilters(state),
+                SearchFiltersWidget(
+                  searchController: _searchController,
+                  onSearchChanged: viewModel.updateSearchText,
+                  searchText: state.searchText,
+                  energyFilter: state.energyFilter,
+                  criticalFilter: state.criticalFilter,
+                  onEnergyFilterToggle: viewModel.toggleEnergyFilter,
+                  onCriticalFilterToggle: viewModel.toggleCriticalFilter,
+                  hasActiveFilters: viewModel.hasActiveFilters,
+                  onClearFilters: viewModel.clearFilters,
+                ),
                 Expanded(
                   child: Visibility(
                     visible: state.treeNodes.isNotEmpty,
@@ -91,129 +102,6 @@ class _AssetsListViewState extends StatefulBaseState<AssetsListView, AssetsListV
 
           return const SizedBox.shrink();
         },
-      ),
-    );
-  }
-
-  Widget _buildSearchAndFilters(AssetsListLoadedState state) {
-    return Container(
-      padding: const EdgeInsets.all(16),
-      child: Column(
-        children: [
-          TextField(
-            controller: _searchController,
-            onChanged: viewModel.updateSearchText,
-            decoration: InputDecoration(
-              hintText: 'Buscar Ativo ou Local',
-              hintStyle: const TextStyle(color: AppColor.lightFont),
-              prefixIcon: const Icon(Icons.search, color: AppColor.lightFont),
-              filled: true,
-              fillColor: AppColor.searchBar,
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(4),
-                borderSide: BorderSide.none,
-              ),
-              suffixIcon:
-                  state.searchText.isNotEmpty
-                      ? IconButton(
-                        onPressed: () {
-                          _searchController.clear();
-                          viewModel.updateSearchText('');
-                        },
-                        icon: const Icon(Icons.clear, color: AppColor.lightFont),
-                      )
-                      : null,
-            ),
-          ),
-          const SizedBox(height: 8),
-          Row(
-            children: [
-              Expanded(
-                child: _buildFilterButton(
-                  title: 'Sensor de Energia',
-                  icon: AppSvg.lightning,
-                  isActive: state.energyFilter,
-                  onTap: viewModel.toggleEnergyFilter,
-                ),
-              ),
-              const SizedBox(width: 8),
-              Expanded(
-                child: _buildFilterButton(
-                  title: 'Crítico',
-                  icon: null,
-                  isActive: state.criticalFilter,
-                  onTap: viewModel.toggleCriticalFilter,
-                  statusIcon: Icons.circle,
-                ),
-              ),
-            ],
-          ),
-          if (viewModel.hasActiveFilters) ...[
-            const SizedBox(height: 8),
-            SizedBox(
-              width: double.infinity,
-              child: TextButton(
-                onPressed: () {
-                  _searchController.clear();
-                  viewModel.clearFilters();
-                },
-                style: TextButton.styleFrom(foregroundColor: AppColor.primary),
-                child: const Text('Limpar filtros'),
-              ),
-            ),
-          ],
-        ],
-      ),
-    );
-  }
-
-  Widget _buildFilterButton({
-    required String title,
-    String? icon,
-    required bool isActive,
-    required VoidCallback onTap,
-    IconData? statusIcon,
-  }) {
-    return InkWell(
-      onTap: onTap,
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-        decoration: BoxDecoration(
-          color: isActive ? AppColor.primary : Colors.transparent,
-          border: Border.all(
-            color: isActive ? AppColor.primary : AppColor.lightFont.withValues(alpha: 0.3),
-          ),
-          borderRadius: BorderRadius.circular(4),
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            if (icon != null)
-              SvgPicture.asset(
-                icon,
-                width: 16,
-                height: 16,
-                colorFilter: ColorFilter.mode(
-                  isActive ? Colors.white : AppColor.lightFont,
-                  BlendMode.srcIn,
-                ),
-              )
-            else if (statusIcon != null)
-              Icon(statusIcon, size: 8, color: isActive ? Colors.white : Colors.red),
-            const SizedBox(width: 4),
-            Flexible(
-              child: Text(
-                title,
-                style: TextStyle(
-                  fontSize: 12,
-                  color: isActive ? Colors.white : AppColor.lightFont,
-                  fontWeight: isActive ? FontWeight.w500 : FontWeight.normal,
-                ),
-                overflow: TextOverflow.ellipsis,
-              ),
-            ),
-          ],
-        ),
       ),
     );
   }

@@ -7,4 +7,6 @@ class AppSvg {
   static const String backButtonAppbar = 'assets/icons/back_button_appbar.svg';
   static const String asset = 'assets/icons/asset.svg';
   static const String lightning = 'assets/icons/lightning.svg';
+  static const String alert = 'assets/icons/alert.svg';
+  static const String emptyLightning = 'assets/icons/empty_lightning.svg';
 }
