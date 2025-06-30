@@ -72,13 +72,13 @@ class _TreeNodeWidget extends StatelessWidget {
         }
         onNodeTap?.call(node);
       },
-      child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 4.0),
+      child: SizedBox(
+        height: 32.0,
         child: Row(
           children: [
             SizedBox(
-              width: level * 24.0 + 24.0,
-              height: 24.0,
+              width: level * 24.0 + 36.0,
+              height: 32.0,
               child: CustomPaint(
                 painter: _TreeLinePainter(
                   level: level,
@@ -188,30 +188,34 @@ class _TreeLinePainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
+    if (level == 0) return;
+
     final paint =
         Paint()
-          ..color = AppColor.lightFont.withValues(alpha: 0.3)
+          ..color = AppColor.lightFont.withValues(alpha: 0.25)
           ..strokeWidth = 1.0
-          ..style = PaintingStyle.stroke;
+          ..style = PaintingStyle.stroke
+          ..strokeCap = StrokeCap.round;
 
-    const double centerY = 12.0;
+    const double centerY = 16.0;
+    const double indentSize = 24.0;
     const double lineOffset = 12.0;
 
-    for (int i = 0; i < parentLines.length; i++) {
-      if (parentLines[i]) {
-        final x = (i + 1) * 24.0 + lineOffset;
-        canvas.drawLine(Offset(x, 0), Offset(x, size.height), paint);
-      }
+    final currentX = level * indentSize + lineOffset;
+
+    canvas.drawLine(Offset(currentX, centerY), Offset(currentX + 14.0, centerY), paint);
+
+    canvas.drawLine(Offset(currentX, 0), Offset(currentX, centerY), paint);
+
+    if (!isLast) {
+      canvas.drawLine(Offset(currentX, centerY), Offset(currentX, size.height), paint);
     }
 
-    if (level > 0) {
-      final startX = level * 24.0 + lineOffset;
-      final endX = startX + 12.0;
-      canvas.drawLine(Offset(startX, centerY), Offset(endX, centerY), paint);
-
-      final verticalStartY = isLast ? 0.0 : centerY;
-      final verticalEndY = isLast ? centerY : size.height;
-      canvas.drawLine(Offset(startX, verticalStartY), Offset(startX, verticalEndY), paint);
+    for (int i = 0; i < parentLines.length && i < level - 1; i++) {
+      if (parentLines[i]) {
+        final ancestorX = (i + 1) * indentSize + lineOffset;
+        canvas.drawLine(Offset(ancestorX, 0), Offset(ancestorX, size.height), paint);
+      }
     }
   }
 
