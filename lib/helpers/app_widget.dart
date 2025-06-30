@@ -4,6 +4,7 @@ import 'package:tractian_challenge/features/home/home.dart';
 import 'package:tractian_challenge/features/splash/splash_view.dart';
 import 'package:tractian_challenge/helpers/navigation.dart';
 import 'package:tractian_challenge/helpers/routes.dart';
+import 'package:tractian_challenge/utils/app_colors.dart';
 
 class MyApp extends StatelessWidget {
   MyApp({super.key});
@@ -29,17 +30,9 @@ class MyApp extends StatelessWidget {
 
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
-          seedColor: const Color(0xFF1E8E3E),
-          secondary: const Color(0xFFFFD700),
+          seedColor: AppColor.appBar,
+          secondary: AppColor.primary,
           brightness: Brightness.light,
-        ),
-        useMaterial3: true,
-      ),
-      darkTheme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: const Color(0xFF1E8E3E),
-          secondary: const Color(0xFFFFD700),
-          brightness: Brightness.dark,
         ),
         useMaterial3: true,
       ),

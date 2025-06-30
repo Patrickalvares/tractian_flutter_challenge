@@ -57,16 +57,23 @@ class _AssetsListViewState extends StatefulBaseState<AssetsListView, AssetsListV
           }
           if (state is AssetsListErrorState) {
             return Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text('Erro: ${state.errorMessage}', style: const TextStyle(color: Colors.red)),
-                  const SizedBox(height: 16),
-                  ElevatedButton(
-                    onPressed: () => viewModel.initialize(companieId: widget.companieId),
-                    child: const Text('Tentar novamente'),
-                  ),
-                ],
+              child: Padding(
+                padding: const EdgeInsets.all(30),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text('Erro: ${state.errorMessage}', style: const TextStyle(color: Colors.red)),
+                    const SizedBox(height: 30),
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: AppColor.primary,
+                        foregroundColor: AppColor.white,
+                      ),
+                      onPressed: () => viewModel.initialize(companieId: widget.companieId),
+                      child: const Text('Tentar novamente'),
+                    ),
+                  ],
+                ),
               ),
             );
           }
