@@ -101,29 +101,37 @@ class _TreeNodeWidget extends StatelessWidget {
             _buildNodeIcon(),
             const SizedBox(width: 8),
             Expanded(
-              child: Row(
-                children: [
-                  Text(
-                    node.name,
-                    maxLines: 2,
-                    style: const TextStyle(fontSize: 14, color: AppColor.darkFont),
-                  ),
-                  if (node.isEnergyComponent)
-                    Padding(
-                      padding: const EdgeInsets.only(left: 4),
-                      child: SvgPicture.asset(
-                        AppSvg.lightning,
-                        width: 14,
-                        height: 14,
-                        colorFilter: const ColorFilter.mode(Colors.green, BlendMode.srcIn),
+              child: RichText(
+                maxLines: 2,
+                text: TextSpan(
+                  children: [
+                    TextSpan(
+                      text: node.name,
+                      style: const TextStyle(fontSize: 14, color: AppColor.darkFont),
+                    ),
+                    if (node.isEnergyComponent)
+                      WidgetSpan(
+                        alignment: PlaceholderAlignment.middle,
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 4),
+                          child: SvgPicture.asset(
+                            AppSvg.lightning,
+                            width: 14,
+                            height: 14,
+                            colorFilter: const ColorFilter.mode(Colors.green, BlendMode.srcIn),
+                          ),
+                        ),
                       ),
-                    ),
-                  if (node.isCriticalComponent)
-                    const Padding(
-                      padding: EdgeInsets.only(left: 4),
-                      child: Icon(Icons.circle, size: 11, color: Colors.red),
-                    ),
-                ],
+                    if (node.isCriticalComponent)
+                      const WidgetSpan(
+                        alignment: PlaceholderAlignment.middle,
+                        child: Padding(
+                          padding: EdgeInsets.only(left: 4),
+                          child: Icon(Icons.circle, size: 11, color: Colors.red),
+                        ),
+                      ),
+                  ],
+                ),
               ),
             ),
           ],
