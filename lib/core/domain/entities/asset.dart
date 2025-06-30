@@ -5,6 +5,7 @@ class Asset {
   final String? parentId;
   final String? sensorType;
   final String? status;
+  final bool isComponent;
 
   Asset({
     required this.id,
@@ -13,6 +14,7 @@ class Asset {
     required this.parentId,
     required this.sensorType,
     required this.status,
+    required this.isComponent,
   });
 
   factory Asset.fromMap(Map map) {
@@ -23,6 +25,7 @@ class Asset {
       parentId: map['parentId'],
       sensorType: map['sensorType'],
       status: map['status'],
+      isComponent: map['sensorType'] != null && map['sensorType'] != '',
     );
   }
 }
