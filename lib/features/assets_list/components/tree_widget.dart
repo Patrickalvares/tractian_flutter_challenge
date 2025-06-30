@@ -103,6 +103,7 @@ class _TreeNodeWidget extends StatelessWidget {
             Expanded(
               child: Text(
                 node.name,
+                maxLines: 2,
                 style: const TextStyle(fontSize: 14, color: AppColor.darkFont),
               ),
             ),

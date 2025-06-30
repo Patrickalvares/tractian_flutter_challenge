@@ -15,29 +15,33 @@ class SearchBarWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
-      controller: controller,
-      onChanged: onChanged,
-      decoration: InputDecoration(
-        hintText: hintText,
-        hintStyle: const TextStyle(color: AppColor.lightFont),
-        prefixIcon: const Icon(Icons.search, color: AppColor.lightFont),
-        filled: true,
-        fillColor: AppColor.searchBar,
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(4),
-          borderSide: BorderSide.none,
-        ),
-        suffixIcon: Visibility(
-          replacement: const SizedBox.shrink(),
-          visible: controller.text.isNotEmpty,
-          child: IconButton(
-            onPressed: () {
-              controller.clear();
-              onChanged('');
-            },
-            icon: const Icon(Icons.clear, color: AppColor.lightFont),
+    return SizedBox(
+      height: 32,
+      child: TextField(
+        controller: controller,
+        onChanged: onChanged,
+        decoration: InputDecoration(
+          hintText: hintText,
+          hintStyle: const TextStyle(color: AppColor.lightFont),
+          prefixIcon: const Icon(Icons.search, color: AppColor.lightFont),
+          filled: true,
+          fillColor: AppColor.searchBar,
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(4),
+            borderSide: BorderSide.none,
           ),
+          suffixIcon: Visibility(
+            replacement: const SizedBox.shrink(),
+            visible: controller.text.isNotEmpty,
+            child: IconButton(
+              onPressed: () {
+                controller.clear();
+                onChanged('');
+              },
+              icon: const Icon(Icons.clear, color: AppColor.lightFont),
+            ),
+          ),
+          contentPadding: const EdgeInsets.symmetric(vertical: 0, horizontal: 12),
         ),
       ),
     );

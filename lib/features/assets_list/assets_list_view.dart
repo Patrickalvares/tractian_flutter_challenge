@@ -45,7 +45,7 @@ class _AssetsListViewState extends StatefulBaseState<AssetsListView, AssetsListV
           icon: SvgPicture.asset(AppSvg.backButtonAppbar),
         ),
         centerTitle: true,
-        title: const Text("Assets"),
+        title: const Text("Assets", style: TextStyle(color: AppColor.white)),
         backgroundColor: AppColor.appBar,
         toolbarHeight: 48,
       ),
@@ -84,6 +84,7 @@ class _AssetsListViewState extends StatefulBaseState<AssetsListView, AssetsListV
                   hasActiveFilters: viewModel.hasActiveFilters,
                   onClearFilters: viewModel.clearFilters,
                 ),
+                Divider(color: AppColor.lightFont.withValues(alpha: 0.15), height: 1),
                 Expanded(
                   child: Visibility(
                     visible: state.treeNodes.isNotEmpty,
